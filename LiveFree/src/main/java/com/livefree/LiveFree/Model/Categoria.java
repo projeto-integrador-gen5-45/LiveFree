@@ -17,7 +17,7 @@ import com.livefree.LiveFree.util.EMotivo;
 @Table(name = "categoria")
 public class Categoria {
 
-	@Id
+	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
