@@ -13,39 +13,39 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table (name = "servico")
+@Table(name = "tb_servico")
 
 public class Servico {
-	
-	//Campos da model
-	
-	@Id 
+
+	// Campos da model
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotNull
-	@Size (min = 1, max = 2000)
+	@Size(min = 1, max = 2000)
 	private String descricao;
-	
+
 	@NotNull
 	private double preco;
-	
+
 	@NotNull
 	private int avaliacao;
-	
+
 	@NotNull
-	@Size (min = 1, max = 2000)
+	@Size(min = 1, max = 2000)
 	private String foto;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonIgnoreProperties("servicos")
 	private Categoria categoria;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonIgnoreProperties("servicos")
-	private Usuario email;
-	
-	//Getters & Setters
+	@JsonIgnoreProperties("meusServicos")
+	private Usuario criador;
+
+	// Getters & Setters
 
 	public long getId() {
 		return id;
@@ -87,5 +87,20 @@ public class Servico {
 		this.foto = foto;
 	}
 
-	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Usuario getCriador() {
+		return criador;
+	}
+
+	public void setCriador(Usuario criador) {
+		this.criador = criador;
+	}
+
 }

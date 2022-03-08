@@ -19,7 +19,7 @@ import com.livefree.LiveFree.util.ECategoria;
 import com.livefree.LiveFree.util.EMotivo;
 
 @Entity
-@Table(name = "categoria")
+@Table(name = "tb_categoria")
 public class Categoria {
 
 	@Id 
@@ -64,6 +64,14 @@ public class Categoria {
 
 	public void setMotivo(EMotivo motivo) {
 		this.motivo = motivo;
+	}
+
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
 	}
 
 }

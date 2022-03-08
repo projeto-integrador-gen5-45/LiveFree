@@ -19,40 +19,38 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.livefree.LiveFree.util.EUsuario;
 
 @Entity
-@Table (name = "usuario")
+@Table(name = "tb_usuario")
 public class Usuario {
-	
-	//Campos da model (tabela)
-	
-	@Id 
+
+	// Campos da model (tabela)
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotNull
-	@Size (min = 1, max = 20)
+	@Size(min = 1, max = 20)
 	private String nome;
-	
+
 	@NotNull
 	private String email;
-	
+
 	@NotNull
 	private String senha;
-	
-	@NotNull
+
 	private @Enumerated(EnumType.STRING) EUsuario usuario;
 
 	@NotNull
-	private String cidade; 
-	
+	private String cidade;
+
 	@NotNull
 	private String idioma;
-	
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("usuario")
-	private List<Servico> servicos = new ArrayList<>();
-     
-	
-	//Getters & Setters
+
+	@OneToMany(mappedBy = "criador", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("criador")
+	private List<Servico> meusServicos = new ArrayList<>();
+
+	// Getters & Setters
 
 	public long getId() {
 		return id;
@@ -109,5 +107,15 @@ public class Usuario {
 	public void setIdioma(String idioma) {
 		this.idioma = idioma;
 	}
-	
+
+	public List<Servico> getMeusServicos() {
+		return meusServicos;
+	}
+
+	public void setMeusServicos(List<Servico> meusServicos) {
+		this.meusServicos = meusServicos;
+	}
+
+
+
 }

@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.livefree.LiveFree.Model.UserLogin;
 import com.livefree.LiveFree.Model.Usuario;
-
-import Service.UsuarioService;
+import com.livefree.LiveFree.Service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")

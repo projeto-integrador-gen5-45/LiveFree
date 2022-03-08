@@ -5,8 +5,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.livefree.LiveFree.Model.Usuario;
 
-
-
 public class UserDetailsImpl  implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -37,7 +35,7 @@ public class UserDetailsImpl  implements UserDetails {
 	public String getUsername() {
 		return email;
 	}
-
+	
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -57,12 +55,5 @@ public class UserDetailsImpl  implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-
-
-
-
-  
-	
-	
 	
 }
