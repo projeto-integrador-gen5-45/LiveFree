@@ -24,16 +24,16 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 
+	@SuppressWarnings("rawtypes")
 	@PostMapping("/logar")
-	public ResponseEntity<UserLogin> Autentication(@RequestBody Optional<UserLogin> user){
-		return usuarioService.Logar(user).map(resp -> ResponseEntity.ok(resp))
-				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+	public ResponseEntity Autentication(@RequestBody Optional<UserLogin> user){
+		return usuarioService.Logar(user);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Usuario> post(@RequestBody Usuario email){
-		return ResponseEntity.status(HttpStatus.CREATED)
-				.body(usuarioService.CadastrarUsuario(email));
+	public ResponseEntity post(@RequestBody Usuario usuario){
+		return usuarioService.CadastrarUsuario(usuario);
 	}
 	
 	

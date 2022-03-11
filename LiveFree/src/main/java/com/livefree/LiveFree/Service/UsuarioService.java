@@ -4,11 +4,18 @@ import java.nio.charset.Charset;
 import java.util.Optional;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.livefree.LiveFree.Model.UserLogin;
 import com.livefree.LiveFree.Model.Usuario;
 import com.livefree.LiveFree.Repository.UsuarioRepository;
+import com.livefree.LiveFree.exceptions.models.EmailExsitException;
+import com.livefree.LiveFree.exceptions.models.EmailNotExistException;
+import com.livefree.LiveFree.exceptions.models.WrongPasswordException;
 
 @Service
 public class UsuarioService {
@@ -16,16 +23,19 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 	
-	public Usuario CadastrarUsuario(Usuario email) {
+	public ResponseEntity<Usuario> CadastrarUsuario(Usuario usuario) {
+		if (repository.findByEmail(usuario.getEmail()).isPresent()) {
+			throw new EmailExsitException(usuario.getEmail());
+		}
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
-		String senhaEncoder = encoder.encode(email.getSenha());
-		email.setSenha(senhaEncoder);
+		String senhaEncoder = encoder.encode(usuario.getSenha());
+		usuario.setSenha(senhaEncoder);
 		
-		return repository.save(email);
+		return ResponseEntity.status(201).body(repository.save(usuario));
 	}
 	
-	public Optional<UserLogin> Logar(Optional<UserLogin> user){
+	public ResponseEntity<UserLogin> Logar(Optional<UserLogin> user){
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<Usuario> usuario = repository.findByEmail(user.get().getUsuario());
 		
@@ -38,11 +48,13 @@ public class UsuarioService {
 				
 				user.get().setToken(authHeader);
 				user.get().setNome(usuario.get().getNome());
+				user.get().setSenha(usuario.get().getSenha());
 				
-				return user;
+				return ResponseEntity.ok(user.get());
 			}
+			throw new WrongPasswordException();
 		}
-		return null;
+		throw new EmailNotExistException(user.get().getUsuario());
 	}
 	
 
