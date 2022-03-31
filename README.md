@@ -1,12 +1,14 @@
 # Grupo 5 - Tarefa 2 do PI - Prototipando o Banco de dados
 Desenvolvedores:
--   Aline Dias;
 -   Caique Ramos;    
 -   Guilherme Petry;    
 -   Marco Alexandre;    
 -   Raiza de Paula;    
 -   Samuel Santos;    
--   Vanessa de Azevedo.
+
+
+Plataforma que conecta profissionais de saúde que prestam serviço comunitário com pacientes em situação de vulnerabilidade social que não teriam condições de pagar por tratamentos especializados.
+
 
 ### Tabela 1: tb_usuarios
 Motivo: Esta tabela foi criada para armazenar dados dos cadastros de 2 tipos de usuários: profissionais e clientes. Dados como nome, e-mail, telefone/celular, senha, cidade e idioma, inseridos pelo usuário (seja do tipo profissional ou do tipo cliente) no momento do cadastro, serão armazenados nesta tabela. Nosso serviço precisa desses dados para conectar prestadores de serviços com pacientes (clientes).
@@ -52,3 +54,5 @@ motivo VARCHAR (45),
 -- alcoolismo, vício em drogas, comportamental, doenças emocional/doenças mentais, nutricionista
 PRIMARY KEY (id)
 );
+
+
